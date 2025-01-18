@@ -24,6 +24,18 @@ class AdminController extends Controller
         return redirect()->route('admin.posts')->with('success', 'Post deleted successfully!');
     }
 
+    public function searchPost(Request $request) {
+        $search = $request->input('search');
+        return view("admin.posts", [
+            "posts" => Post::where('title', 'like', "%{$search}%")
+            ->orWhereHas('author', function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->simplePaginate(6),
+            'search' => $search
+        ]);
+    }
+
     public function author() {
         return view("admin.authors", [
             "authors" => User::where('role', 'author')->simplePaginate(4)
@@ -59,6 +71,15 @@ class AdminController extends Controller
         return redirect()->route('admin.author')->with('success', 'Author promoted successfully!');
     }
 
+    public function searchAuthor(Request $request) {
+        $search = $request->input('search');
+        return view("admin.authors", [
+            "authors" => User::where('name', 'like', "%{$search}%")->Where('role', 'author')
+            ->simplePaginate(4),
+            'search' => $search
+        ]);
+    }
+
     public function comments() {
         return view("admin.comments", [
             "comments" => Comment::simplePaginate(6)
@@ -68,5 +89,14 @@ class AdminController extends Controller
     public function deleteComment(Comment $comment) {
         $comment->delete();
         return redirect()->route('admin.comments')->with('success', 'Comment deleted successfully!');
+    }
+
+    public function searchComment(Request $request) {
+        $search = $request->input('search');
+        return view("admin.comments", [
+            "comments" => Comment::where('content', 'like', "%{$search}%")
+            ->simplePaginate(6),
+            'search' => $search
+        ]);
     }
 }

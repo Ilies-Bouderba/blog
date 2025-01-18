@@ -20,9 +20,11 @@
 
                 <!-- Search Bar -->
                 <div class="mb-6">
-                    <form action="#" method="GET" class="flex items-center">
+                    <form action="{{ route('admin.author.search') }}" method="POST" class="flex items-center">
+                        @csrf
                         <input type="text" name="search" placeholder="Search authors..."
-                            class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none" />
+                            class="w-full px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none" 
+                            value="{{ $search ?? '' }}"/>
                         <button type="submit"
                             class="bg-black text-white px-4 py-2 rounded-r-lg hover:bg-gray-900 focus:outline-none">
                             <i class="fas fa-search"></i>

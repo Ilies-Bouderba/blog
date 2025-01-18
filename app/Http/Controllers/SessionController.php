@@ -48,4 +48,10 @@ class SessionController extends Controller
 
         return redirect()->intended('/');
     }
+
+    public function logout() {
+        Auth::logout();
+
+        return redirect()->route('home');
+    }
 }

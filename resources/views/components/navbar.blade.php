@@ -20,7 +20,7 @@
         <!-- Search, Login Button, and Mobile Menu Button -->
         <div class="flex md:order-2">
             <!-- Search Bar (Visible on medium and larger screens) -->
-            <div class="ml-3  relative mr-5 hidden md:block">
+            <div class="ml-3 relative mr-5 hidden md:block">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
@@ -29,14 +29,29 @@
                 <input type="text" class="bg-gray-50 text-gray-900 sm:text-sm rounded-lg block w-72 pl-10 p-2 focus:outline-none focus:ring-0 focus:border-transparent" placeholder="Search...">
             </div>
 
-            <!-- Login Button -->
+            <!-- Dropdown for Authenticated Users -->
             @if (Auth::check())
-                <a href="#" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
-                    {{ Auth::user()->name }}
-                 </a>
+                <div class="relative ml-3" x-data="{ open: false }">
+                    <button @click="open = !open" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300 focus:outline-none">
+                        {{ Auth::user()->name }}
+                        <svg class="w-4 h-4 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Create Posts</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</button>
+                        </form>
+                    </div>
+                </div>
             @else
                 <a href="{{ route('login') }}" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
-                    login
+                    Login
                 </a>
             @endif
 
@@ -56,9 +71,9 @@
                     <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'text-white' : 'text-gray-300 hover:text-white' }} border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0" aria-current="page">Home</a>
                 </li>
                 @if (Auth::check() && Auth::user()->role == 'admin')
-                <li>
-                    <a href="{{ route('admin') }}" class="{{ Route::is('admin') ? 'text-white' : 'text-gray-300 hover:text-white' }} border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0">Admin Panel</a>
-                </li>
+                    <li>
+                        <a href="{{ route('admin') }}" class="{{ Route::is('admin') ? 'text-white' : 'text-gray-300 hover:text-white' }} border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0">Admin Panel</a>
+                    </li>
                 @endif
                 <li>
                     <a href="#" class="text-gray-300 hover:text-white border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0">About</a>
@@ -85,15 +100,38 @@
                 <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'text-white' : 'text-gray-300 hover:text-white' }} block pl-3 pr-4 py-2 rounded">Home</a>
             </li>
             @if (Auth::check() && Auth::user()->role == 'admin')
-            <li class="border-b border-gray-700">
-                <a href="{{ route('admin') }}" class="{{ Route::is('admin') ? 'text-white' : 'text-gray-300 hover:text-white' }} block pl-3 pr-4 py-2 rounded">Admin Panel</a>
-            </li>
+                <li class="border-b border-gray-700">
+                    <a href="{{ route('admin') }}" class="{{ Route::is('admin') ? 'text-white' : 'text-gray-300 hover:text-white' }} block pl-3 pr-4 py-2 rounded">Admin Panel</a>
+                </li>
             @endif
-
             <li class="border-b border-gray-700">
                 <a href="#" class="text-gray-300 block pl-3 pr-4 py-2 rounded">About</a>
             </li>
         </ul>
+
+        <!-- Mobile Dropdown for Authenticated Users -->
+        @if (Auth::check())
+            <div class="mt-4 px-4">
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300 focus:outline-none">
+                        {{ Auth::user()->name }}
+                        <svg class="w-4 h-4 inline ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="open" @click.away="open = false" class="mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Create Posts</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </nav>
 

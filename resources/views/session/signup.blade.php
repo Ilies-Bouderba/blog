@@ -23,7 +23,7 @@
             </div>
 
             <!-- Sign Up Form -->
-            <form method="POST" action="{{ route('signup') }}">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
