@@ -30,9 +30,15 @@
             </div>
 
             <!-- Login Button -->
-            <a href="{{ route('login') }}" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
-                Login
-            </a>
+            @if (Auth::check())
+                <a href="#" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
+                    {{ Auth::user()->name }}
+                 </a>
+            @else
+                <a href="{{ route('login') }}" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
+                    login
+                </a>
+            @endif
 
             <!-- Mobile Menu Button -->
             <button data-collapse-toggle="mobile-menu-3" type="button" class="md:hidden text-gray-400 hover:text-white focus:outline-none focus:ring-0 rounded-lg inline-flex items-center justify-center" aria-controls="mobile-menu-3" aria-expanded="false">

@@ -23,29 +23,39 @@
             </div>
 
             <!-- Sign Up Form -->
-            <form>
+            <form method="POST" action="{{ route('signup') }}">
+                @csrf
                 <div class="mb-4">
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                     <input type="text" id="name" name="name" placeholder="Enter your full name"
                         class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-                        required />
+                        required value="{{ old('name') }}" />
+                    @error('name')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                     <input type="email" id="email" name="email" placeholder="Enter your email"
                         class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-                        required />
+                        required value="{{ old('Email') }}" />
+                    @error('email')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-6">
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter your password"
                         class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                         required />
+                    @error('password')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
-                <a href="#"
+                <button type="submit"
                     class="w-full bg-black text-white py-2.5 px-4 rounded-lg font-semibold hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black text-center block">
                     Sign Up
-                </a>
+                </button>
             </form>
 
             <!-- Additional Links -->
