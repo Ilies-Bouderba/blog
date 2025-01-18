@@ -1,3 +1,13 @@
+<!-- Call to Action Section -->
+<div class="bg-black text-white py-16">
+    <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Join Our Community</h2>
+        <p class="text-xl mb-8">Stay updated with the latest posts and exclusive content.</p>
+        <a href="#"
+            class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition duration-300">Subscribe
+            Now</a>
+    </div>
+</div>
 <!-- Footer -->
 <footer class="bg-black text-white border-t border-white py-8">
     <div class="container mx-auto px-6">
@@ -12,7 +22,7 @@
             <div>
                 <h3 class="text-xl font-bold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                    <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white">Home</a></li>
                     <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
                     <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
                 </ul>
@@ -32,7 +42,7 @@
             </div>
         </div>
         <div class="text-center mt-8">
-            <p class="text-gray-400">&copy; 2023 Bloggers. All rights reserved.</p>
+            <p class="text-gray-400">&copy; {{ now()->format('Y') }} Bloggers. All rights reserved.</p>
         </div>
     </div>
 </footer>

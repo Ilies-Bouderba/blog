@@ -8,7 +8,7 @@
         <span class="text-sm text-gray-500">{{ $post->created_at->format('Y-m-d') }}</span>
         <h3 class="text-xl font-bold text-gray-800 mt-2">{{ Str::limit($post->title, 50, '...') }}</h3>
         <p class="text-gray-600 mt-2">{{ Str::limit($post->content, 75, '...') }}</p>
-        <a href="#" class="text-blue-500 font-semibold mt-4 inline-block hover:text-blue-700">Read More
+        <a href="/blog/{{ $post->id }}" class="mt-4 inline-block text-black hover:text-gray-700 font-semibold">Read More
             →</a>
     </div>
 </div>

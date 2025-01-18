@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Post;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Author>
  */
-class CommentFactory extends Factory
+class AuthorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,8 +19,6 @@ class CommentFactory extends Factory
     {
         return [
             "user_id" => User::inRandomOrder()->first()->id,
-            "post_id" => Post::inRandomOrder()->first()->id,
-            "content" => $this->faker->paragraph,
         ];
     }
 }

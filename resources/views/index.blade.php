@@ -23,16 +23,4 @@
 
 <x-category :categoryPosts="$categoryPosts" />
 
-
-
-<!-- Call to Action Section -->
-<div class="bg-black text-white py-16">
-    <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-4">Join Our Community</h2>
-        <p class="text-xl mb-8">Stay updated with the latest posts and exclusive content.</p>
-        <a href="#"
-            class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition duration-300">Subscribe
-            Now</a>
-    </div>
-</div>
 <x-footer />

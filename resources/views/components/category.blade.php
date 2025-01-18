@@ -7,7 +7,7 @@
             <li>
                 <div class="flex items-center">
                     <a href="#"
-                        class="text-3xl font-bold text-gray-500 hover:text-blue-600 transition duration-300">Category</a>
+                        class="text-3xl font-bold text-gray-500 hover:text-gray-900 transition duration-300">Category</a>
                 </div>
             </li>
             <li aria-current="page">

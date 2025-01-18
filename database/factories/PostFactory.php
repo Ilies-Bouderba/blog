@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Author;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Category;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
 class PostFactory extends Factory
 {
@@ -22,7 +23,7 @@ class PostFactory extends Factory
             "title" => $this->faker->sentence,
             "content" => $this->faker->paragraph,
             'image' => $this->faker->imageUrl(640, 480, 'posts', true),
-            "user_id" => User::inRandomOrder()->first()->id,
+            "author_id" => Author::inRandomOrder()->first()->id,
             "category_id" => Category::inRandomOrder()->first()->id,
 
         ];
