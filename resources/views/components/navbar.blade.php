@@ -30,7 +30,7 @@
             </div>
 
             <!-- Login Button -->
-            <a href="/login" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
+            <a href="{{ route('login') }}" class="text-gray-300 hover:text-white px-4 py-1 rounded-lg transition duration-300">
                 Login
             </a>
 

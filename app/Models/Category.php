@@ -12,6 +12,6 @@ class Category extends Model
     protected $guarded = [];
 
     public function post():HasMany   {
-        return $this->hasMany(Post::class)->limit(3);
+        return $this->hasMany(Post::class);
     }
 }
