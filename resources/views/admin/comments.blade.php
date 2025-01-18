@@ -1,7 +1,7 @@
 <x-header title="The Journal - Comments Dashboard" />
 <x-navbar />
 
-<div class="flex h-screen">
+<div class="flex">
     <!-- Sidebar -->
     <x-admin-sidebar />
 
@@ -11,6 +11,11 @@
 
             <div class="bg-white p-6 rounded-lg">
 
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
                 <div class="mb-6">
                     <form action="#" method="GET" class="flex items-center">
@@ -39,20 +44,24 @@
                         </thead>
                         <tbody>
                             @foreach ($comments as $comment)
-
-                            <tr class="hover:bg-gray-50">
-                                <td class="py-3 px-4 border-b">{{ $comment->id }}</td>
-                                <td class="py-3 px-4 border-b">{{ Str::limit($comment->content, 40, '...') }}</td>
-                                <td class="py-3 px-4 border-b">{{ Str::limit($comment->post->title, 20, '...') }}</td>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 border-b">{{ $comment->id }}</td>
+                                    <td class="py-3 px-4 border-b">{{ Str::limit($comment->content, 40, '...') }}</td>
+                                    <td class="py-3 px-4 border-b">{{ Str::limit($comment->post->title, 20, '...') }}
+                                    </td>
                                     <td class="py-3 px-4 border-b">{{ $comment->user->name }}</td>
 
-                                <td class="py-3 px-4 border-b">
-
-                                    <a href="#" class="text-red-600 hover:text-red-800">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </a>
-                                </td>
-                            </tr>
+                                    <td class="py-3 px-4 border-b">
+                                        <form method="POST"
+                                            action="{{ route('admin.comments.delete', $comment->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

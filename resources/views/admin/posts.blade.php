@@ -2,7 +2,7 @@
 <x-navbar />
 
 <!-- Dashboard Layout -->
-<div class="flex h-screen">
+<div class="flex">
 
     <x-admin-sidebar />
 
@@ -12,6 +12,12 @@
         <!-- Content Area -->
         <main class="flex-1 p-6">
             <div class="bg-white p-6 rounded-lg">
+
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
                 <div class="mb-6">
                     <form action="#" method="GET" class="flex items-center">
@@ -44,9 +50,14 @@
                                     <td class="py-3 px-4 border-b">{{ Str::limit($post->title, 40, '...') }}</td>
                                     <td class="py-3 px-4 border-b">{{ $post->author->name }}</td>
                                     <td class="py-3 px-4 border-b">
-                                        <a href="#" class="text-red-600 hover:text-red-800">
-                                            <i class="fas fa-trash"></i> Delete
-                                        </a>
+                                        <form action="{{ route('admin.posts.delete', $post->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -54,7 +65,7 @@
                     </table>
                 </div>
             </div>
-            <span class="m-0 p-0">">
+            <span class="m-0 p-0">
                 {{ $posts->links('vendor.pagination.simple-default') }}
             </span>
         </main>

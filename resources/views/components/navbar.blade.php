@@ -53,11 +53,13 @@
         <div class="hidden md:flex justify-between items-center w-full md:w-auto md:order-1" id="desktop-menu">
             <ul class="flex-col md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium">
                 <li>
-                    <a href="{{ route('home') }}" class="text-white block pl-3 pr-4 py-2 md:p-0 rounded" aria-current="page">Home</a>
+                    <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'text-white' : 'text-gray-300 hover:text-white' }} border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0" aria-current="page">Home</a>
                 </li>
+                @if (Auth::check() && Auth::user()->role == 'admin')
                 <li>
-                    <a href="#" class="text-gray-300 hover:text-white border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0">Categories</a>
+                    <a href="{{ route('admin') }}" class="{{ Route::is('admin') ? 'text-white' : 'text-gray-300 hover:text-white' }} border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0">Admin Panel</a>
                 </li>
+                @endif
                 <li>
                     <a href="#" class="text-gray-300 hover:text-white border-b border-gray-700 md:border-0 block pl-3 pr-4 py-2 md:p-0">About</a>
                 </li>
@@ -80,11 +82,14 @@
         <!-- Mobile Menu Links -->
         <ul class="flex flex-col space-y-2 mt-4 px-4">
             <li class="border-b border-gray-700">
-                <a href="{{ route('home') }}" class="text-white block pl-3 pr-4 py-2 rounded">Home</a>
+                <a href="{{ route('home') }}" class="{{ Route::is('home') ? 'text-white' : 'text-gray-300 hover:text-white' }} block pl-3 pr-4 py-2 rounded">Home</a>
             </li>
+            @if (Auth::check() && Auth::user()->role == 'admin')
             <li class="border-b border-gray-700">
-                <a href="#" class="text-gray-300 block pl-3 pr-4 py-2 rounded">Categories</a>
+                <a href="{{ route('admin') }}" class="{{ Route::is('admin') ? 'text-white' : 'text-gray-300 hover:text-white' }} block pl-3 pr-4 py-2 rounded">Admin Panel</a>
             </li>
+            @endif
+
             <li class="border-b border-gray-700">
                 <a href="#" class="text-gray-300 block pl-3 pr-4 py-2 rounded">About</a>
             </li>
