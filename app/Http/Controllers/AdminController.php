@@ -20,6 +20,7 @@ class AdminController extends Controller
     }
 
     public function deletePost(Post $post) {
+        $post->comments()->delete();
         $post->delete();
         return redirect()->route('admin.posts')->with('success', 'Post deleted successfully!');
     }

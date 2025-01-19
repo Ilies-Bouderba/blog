@@ -17,6 +17,7 @@ class AuthorController extends Controller
     }
 
     public function deletePost(Post $post) {
+        $post->comments()->delete();
         $post->delete();
         return redirect()->route('author')->with('success', 'Post deleted successfully');
     }
@@ -53,9 +54,20 @@ class AuthorController extends Controller
             'title' => 'required',
             'content' => 'required',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        Post::create($data + ['author_id' => Auth::user()->id]);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('private/images', 'local');
+        }
+
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category_id,
+            'image' => $imagePath ?? null,
+            'author_id' => Auth::user()->id,
+        ]);
 
         return redirect()->route('author')->with('success', 'Post created successfully');
     }

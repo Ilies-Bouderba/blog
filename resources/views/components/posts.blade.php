@@ -21,7 +21,7 @@
 @else
     @foreach ($posts as $post)
     <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <img src="{{ $post->image }}" alt="Blog Post 1"
+        <img src="{{ route('image.show', ['filename' => basename($post->image)]) }}" alt="Blog Post 1"
             class="w-full h-48 object-cover">
         <div class="p-6">
             <span class="text-sm text-gray-500">{{ $post->created_at->format('Y-m-d') }}</span>

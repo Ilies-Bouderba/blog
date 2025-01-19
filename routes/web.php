@@ -3,13 +3,17 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class , 'index'])->name('home');
 Route::get('/blog/{id}', [PostController::class, 'show'])->name('blog');
+Route::post('/blog/{id}/comment', [PostController::class, 'comment'])->name('blog.comment');
+Route::delete('/blog/{id}/comment/delete', [PostController::class, 'deleteComment'])->name('blog.comment.delete');
 Route::post('/', [PostController::class, 'search'])->name('blog.search');
+Route::get('/image/{filename}', [ImageController::class, 'show'])->name('image.show');
 
 Route::get('/login', [SessionController::class, 'login'])->name('login');
 Route::post('/login', [SessionController::class, 'authenticate'])->name('authenticate');
@@ -40,4 +44,9 @@ Route::middleware('author')->group(function () {
     Route::put('/author/post/{id}', [AuthorController::class, 'updatePost'])->name('author.update');
     Route::get('/author/post/create', [AuthorController::class, 'createPost'])->name('author.create');
     Route::post('/author/post/create', [AuthorController::class, 'storePost'])->name('author.store');
+});
+
+
+Route::fallback(function () {
+    return abort(404);
 });

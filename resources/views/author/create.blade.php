@@ -12,8 +12,18 @@
     @endif
 
     <!-- Create Form -->
-    <form action="{{ route('author.store') }}" method="POST">
+    <form action="{{ route('author.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
+        <!-- Image Upload Field -->
+        <div class="mb-4">
+            <label for="image" class="block text-gray-700 font-bold mb-2">Upload Image</label>
+            <input type="file" name="image" id="image"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none">
+            @error('image')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
 
         <!-- Title Field -->
         <div class="mb-4">
@@ -32,7 +42,8 @@
                 class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-0 bg-white text-gray-900 hover:outline-none ">
                 <option value="" disabled selected>Select a category</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" class="hover:bg-gray-900 hover:text-white">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" class="hover:bg-gray-900 hover:text-white">{{ $category->name }}
+                    </option>
                 @endforeach
             </select>
             @error('category')
