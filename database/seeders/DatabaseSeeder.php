@@ -7,7 +7,6 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use App\Models\Author;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,8 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         Category::factory(4)->create();
-        Author::factory(3)->create();
-        Post::factory(25)->create();
-        Comment::factory(100)->create();
+        $author = User::where("role", "author")->first();
+        if($author) {
+            Post::factory(25)->create();
+        }
+        if (Post::count() > 0) {
+            Comment::factory(100)->create();
+        }
     }
 }

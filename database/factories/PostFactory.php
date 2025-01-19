@@ -23,7 +23,7 @@ class PostFactory extends Factory
             "title" => $this->faker->sentence,
             "content" => $this->faker->paragraph,
             'image' => $this->faker->imageUrl(640, 480, 'posts', true),
-            "author_id" => Author::inRandomOrder()->first()->id,
+            "author_id" => User::where('role', 'author')->inRandomOrder()->first()->id,
             "category_id" => Category::inRandomOrder()->first()->id,
 
         ];

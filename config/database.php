@@ -40,6 +40,11 @@ return [
             'busy_timeout' => null,
             'journal_mode' => null,
             'synchronous' => null,
+            'after_commit' => ['PRAGMA foreign_keys = ON;'],
+            'options' => [
+                // This will automatically run the PRAGMA
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ],
         ],
 
         'mysql' => [

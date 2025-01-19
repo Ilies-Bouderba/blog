@@ -16,4 +16,13 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         return view("post.show", compact("post"));
     }
+
+    public function search(Request $request) {
+        $search = $request->input('search');
+        $posts = Post::where("title", "like", "%{$search}%")->simplePaginate(6);
+        return view("search", [
+            "posts" => $posts,
+            "search" => $search
+        ]);
+    }
 }
