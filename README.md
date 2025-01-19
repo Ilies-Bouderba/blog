@@ -6,23 +6,23 @@
 
 ## Features
 
-- **User Authentication**: Register, login, and logout functionality.
-- **CRUD Operations**: Create, read, update, and delete blog posts.
-- **Categories**: Organize posts into categories.
-- **Pagination**: Browse posts with pagination.
-- **File Uploads**: Upload images for blog posts.
-- **Optional Features**:
-  - Comments system.
-  - Search functionality.
-  - Roles and permissions (Admin, Writer).
+- **User Authentication**: Register, log in, and manage user profiles.
+- **Post Management**: Create, update, delete, and publish blog posts.
+- **Comments**: Allow users to comment on blog posts.
+- **Categories and Tags**: Organize posts with categories and tags.
+- **Search Functionality**: Search for posts by title, content, or tags.
+- **Admin/Author**: dashboard.
+- **Responsive Design**: Mobile-friendly and optimized for all devices.
+
+## Installation
 
 ---
 
 ## Technologies Used
 
 - **Backend**: Laravel (PHP)
-- **Frontend**: Blade Templating, Tailwind CSS (or Bootstrap)
-- **Database**: MySQL
+- **Frontend**: Blade Templating, Tailwind CSS
+- **Database**: sqlite
 - **Tools**: Composer, Git, Laravel Artisan
 
 ---
@@ -48,7 +48,7 @@ The Blogger platform is built using the **Model-View-Controller (MVC)** architec
 
 4. **Frontend Interaction**:
    - The frontend is built using **Blade templates** for dynamic content rendering.
-   - **Tailwind CSS** (or Bootstrap) is used for styling.
+   - **Tailwind CSS** is used for styling.
    - Optional interactivity (e.g., dropdowns, modals) can be added using **Alpine.js**.
 
 5. **Database**:
@@ -56,11 +56,11 @@ The Blogger platform is built using the **Model-View-Controller (MVC)** architec
      - `users`: Stores user information.
      - `posts`: Stores blog posts.
      - `categories`: Stores post categories.
-     - `comments` (optional): Stores user comments on posts.
+     - `comments`: Stores user comments on posts.
    - Relationships:
      - A **user** has many **posts**.
      - A **post** belongs to a **category**.
-     - A **post** has many **comments** (optional).
+     - A **post** has many **comments**.
 
 6. **Routing**:
    - Routes are defined in `routes/web.php`.
@@ -70,21 +70,14 @@ The Blogger platform is built using the **Model-View-Controller (MVC)** architec
 7. **Controllers**:
    - Controllers handle the logic for each feature:
      - `PostController`: Manages CRUD operations for posts.
-     - `CategoryController`: Manages categories (optional).
-     - `CommentController`: Manages comments (optional).
+     - `CategoryController`: Manages categories.
+     - `CommentController`: Manages comments.
 
-8. **Views**:
-   - Views are created using **Blade templates**:
-     - `layouts/app.blade.php`: Main layout file.
-     - `posts/index.blade.php`: Lists all posts.
-     - `posts/show.blade.php`: Displays a single post.
-     - `posts/create.blade.php`: Form to create a new post.
-     - `posts/edit.blade.php`: Form to edit an existing post.
 
-9. **Optional Features**:
-   - **Comments**: Users can comment on posts (optional).
-   - **Search**: Users can search for posts by title or content (optional).
-   - **Roles and Permissions**: Admins can manage users and posts (optional).
+8. **Optional Features**:
+   - **Comments**: Users can comment on posts.
+   - **Search**: Users can search for posts by title or content.
+   - **Roles and Permissions**: Admins can manage users and posts.
 
 ---
 
@@ -92,16 +85,9 @@ The Blogger platform is built using the **Model-View-Controller (MVC)** architec
 
 Follow these steps to set up the project locally:
 
-### Prerequisites
-
-- PHP >= 8.0
-- Composer
-- MySQL
-- Node.js (for frontend dependencies)
-
 ### Steps
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/blogger.git
-   cd blogger
+   git clone https://github.com/Ilies-Bouderba/blog.git
+   cd blog
